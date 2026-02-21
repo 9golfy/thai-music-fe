@@ -1,0 +1,178 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #0A3625;
+  --foreground: #e8e0d0;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #0A3625;
+  --primary-foreground: #ffffff;
+  --secondary: #e8f5ee;
+  --secondary-foreground: #0A3625;
+  --muted: #f0f0eb;
+  --muted-foreground: #6b6b6b;
+  --accent: #BE8C13;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #fecaca;
+  --border: #d4d4c8;
+  --input: #d4d4c8;
+  --ring: #0A3625;
+  --chart-1: #0A3625;
+  --chart-2: #BE8C13;
+  --chart-3: #2d9b5a;
+  --chart-4: #1a1a1a;
+  --chart-5: #f0f0eb;
+  --radius: 0.625rem;
+  --gold: #BE8C13;
+  --gold-gradient-start: #B48E3E;
+  --gold-gradient-mid: #E6E39A;
+  --gold-gradient-end: #B48E3E;
+  --green: #0A3625;
+  --green-light: #e8f5ee;
+}
+
+@theme inline {
+  --font-sans: var(--font-sarabun), 'Geist', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-gold: var(--gold);
+  --color-green: var(--green);
+  --color-green-light: var(--green-light);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Cinematic Gold Title Effect (20th Century Fox Style) */
+@layer utilities {
+  /* Metallic gold gradient with shimmer sweep */
+  .cinematic-gold-title {
+    /* Base metallic gold gradient: darker edges → rich gold → bright highlight */
+    background: linear-gradient(
+      90deg,
+      #8B6914 0%,           /* Darker gold edge (left) */
+      #B8860B 20%,          /* Rich gold */
+      #DAA520 35%,          /* Golden mid-tone */
+      #FFD700 45%,          /* Bright gold */
+      #FFFACD 50%,          /* Near-white highlight (center) */
+      #FFD700 55%,          /* Bright gold */
+      #DAA520 65%,          /* Golden mid-tone */
+      #B8860B 80%,          /* Rich gold */
+      #8B6914 100%          /* Darker gold edge (right) */
+    );
+    
+    /* Shimmer sweep overlay: moving diagonal highlight band */
+    background-image: 
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.3) 55%,
+        transparent 70%,
+        transparent 100%
+      ),
+      linear-gradient(
+        90deg,
+        #8B6914 0%,
+        #B8860B 20%,
+        #DAA520 35%,
+        #FFD700 45%,
+        #FFFACD 50%,
+        #FFD700 55%,
+        #DAA520 65%,
+        #B8860B 80%,
+        #8B6914 100%
+      );
+    
+    background-size: 200% 100%, 100% 100%;
+    background-position: -200% center, center center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Multi-layer text shadows for 3D bevel/emboss effect */
+    text-shadow:
+      /* Top highlight (bright edge simulation) */
+      0 1px 0 rgba(255, 250, 205, 0.8),
+      0 2px 0 rgba(255, 250, 205, 0.4),
+      
+      /* Bottom depth shadow (darker edge for 3D feel) */
+      0 3px 2px rgba(107, 79, 15, 0.6),
+      0 5px 4px rgba(107, 79, 15, 0.4),
+      0 8px 8px rgba(107, 79, 15, 0.3),
+      
+      /* Ambient glow (warm gold halo) */
+      0 0 20px rgba(218, 165, 32, 0.5),
+      0 0 40px rgba(218, 165, 32, 0.3),
+      0 0 60px rgba(218, 165, 32, 0.2);
+    
+    /* Shimmer animation */
+    animation: cinematic-shimmer 4s linear infinite;
+    
+    /* Performance optimization */
+    will-change: background-position;
+  }
+  
+  /* Shimmer keyframes: light sweep from left to right */
+  @keyframes cinematic-shimmer {
+    0% {
+      background-position: -200% center, center center;
+    }
+    100% {
+      background-position: 200% center, center center;
+    }
+  }
+  
+  /* Accessibility: Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .cinematic-gold-title {
+      animation: none;
+      background-position: center center, center center;
+    }
+  }
+}
